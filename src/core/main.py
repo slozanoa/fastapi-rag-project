@@ -33,7 +33,6 @@ origins = [
     "http://127.0.0.1:3000",
     "https://slozanoa.lat",
     "http://144.91.91.7:8001",
-    "https://next-chat-rag.vercel.app/",
     "https://next-chat-rag.vercel.app",
 ]
 
