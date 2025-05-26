@@ -29,21 +29,22 @@ app = FastAPI(
     lifespan=lifespan
 )
 origins = [
-    "http://localhost:3000",         # React local
-    "http://127.0.0.1:3000",          # React local alternativa
-    "https://slozanoa.lat",           # Si usas dominio
-    "http://144.91.91.7:8001",        # IP del VPS
-    "https://tudominio.com",          # Reemplázalo por el dominio real si tienes frontend
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://slozanoa.lat",
+    "http://144.91.91.7:8001",
+    "https://next-chat-rag.vercel.app/",
+    "https://next-chat-rag.vercel.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # o ["*"] si quieres permitir todo temporalmente (NO recomendado para producción)
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# Cargar el chain una sola vez al iniciar la app
+
 qa_chain = None
 
 @app.post("/ask", response_model=Answer)
