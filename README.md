@@ -30,7 +30,7 @@ OPENAI_API_KEY=tu-api-key-aquí
 
 2. Coloca tu PDF en la carpeta `data/`
 
-## Instalación
+## Instalación Local
 
 ```bash
 python -m venv venv
@@ -38,14 +38,40 @@ source venv/bin/activate  # En Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Uso
+## Uso Local
 
-Para iniciar la API:
+Para iniciar la API localmente:
 ```bash
 uvicorn src.core.main:app --reload
 ```
 
 La API estará disponible en `http://localhost:8000`
+
+## Despliegue con Dokploy
+
+### Requisitos Previos
+- Tener Dokploy configurado en tu VPS
+- Tener acceso al repositorio Git
+
+### Pasos para el Despliegue
+
+1. Asegúrate de tener el archivo `.env` en tu VPS con las variables necesarias:
+```bash
+OPENAI_API_KEY=tu-api-key-aquí
+```
+
+2. En Dokploy:
+   - Conecta tu repositorio de GitHub
+   - Selecciona la rama a desplegar
+   - Configura el trigger de despliegue (manual o automático)
+   - Asegúrate de que los volúmenes `data` y `db` estén configurados
+
+3. Para un despliegue manual:
+   - Usa el botón "Deploy" en la interfaz de Dokploy
+   - O usa el CLI de Dokploy:
+     ```bash
+     dokploy deploy rag
+     ```
 
 ### Endpoints
 
@@ -59,4 +85,6 @@ La API estará disponible en `http://localhost:8000`
 - LangChain
 - OpenAI GPT-3.5
 - HuggingFace Embeddings
-- ChromaDB 
+- ChromaDB
+- Docker
+- Dokploy 

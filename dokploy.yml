@@ -1,0 +1,21 @@
+version: "1"
+name: rag
+
+services:
+  api:
+    image: ${REGISTRY:-localhost}/rag-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - data:/app/data
+      - db:/app/db
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: unless-stopped
+
+volumes:
+  data:
+  db: 
