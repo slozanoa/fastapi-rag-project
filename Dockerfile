@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 8000
 
 # Comando para ejecutar la app con Uvicorn en modo debug para mejor logging
-CMD ["uvicorn", "src.core.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level"
+CMD ["uvicorn", "src.core.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level"]
