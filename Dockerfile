@@ -1,28 +1,23 @@
-# Use Python 3.11 slim image
+# Imagen base oficial de Python slim
 FROM python:3.11-slim
 
-# Set working directory
+# Establecer directorio de trabajo
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+# Instalar dependencias de sistema (para compilaciones si hace falta)
+RUN apt-get update && apt-get install -y build-essential curl && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first to leverage Docker cache
+# Copiar archivo de requerimientos
 COPY requirements.txt .
 
-# Install Python dependencies
+# Instalar dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application
+# Copiar toda la app
 COPY . .
 
-# Create necessary directories
-RUN mkdir -p data db
-
-# Expose port
+# Exponer el puerto 8000 para la app
 EXPOSE 8000
 
-# Command to run the application
-CMD ["uvicorn", "src.core.main:app", "--host", "0.0.0.0", "--port", "8000"] 
+# Comando para ejecutar la app con Uvicorn en modo debug para mejor logging
+CMD ["uvicorn", "src.core.main:app", "--host", "0.0.0.0", "--port", "8000", "--log-level"
